@@ -13,14 +13,30 @@ interface DatabasePluginOptions {
 }
 
 const setup_database: FastifyPluginAsync<DatabasePluginOptions> = async(fastify: FastifyInstance, opts) =>  {
-    const database = new Sequelize({
-        host: opts.host,
-        database: opts.database,
-        dialect: "postgres",
-        username: opts.user,
-        password: process.env.POSTGRESPASS,
-        models: [Question]
-    });
+    let database:Sequelize;
+
+    if(process.env.ENV === "production") {
+        database = new Sequelize({
+            database: opts.database,
+            username: opts.user,
+            password: process.env.POSTGRESPASS,
+            dialect: "postgres",
+            dialectOptions: { socketPath: "/cloudsql/intimaquiz:us-central1:intimaquiz-db" },
+            models: [Question]
+        });
+
+    }
+    else {
+
+        database = new Sequelize({
+            host: opts.host,
+            database: opts.database,
+            dialect: "postgres",
+            username: opts.user,
+            password: process.env.POSTGRESPASS,
+            models: [Question]
+        });
+    }
 
     try {
         await database.authenticate();
