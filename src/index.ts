@@ -2,6 +2,10 @@ import fastify from 'fastify'
 
 const server = fastify()
 
+server.get('/', async (request, reply) => {
+    return 'hello world!\n'
+})
+
 server.get('/ping', async (request, reply) => {
   return 'pong\n'
 })
