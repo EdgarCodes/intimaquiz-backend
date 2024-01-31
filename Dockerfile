@@ -18,7 +18,7 @@ COPY tsconfig.json ./
 RUN npm run build
 
 # Bind the port that the app runs on
-EXPOSE 80
+EXPOSE 8080
 
 # Run the compiled app
 CMD [ "npm", "start" ]
