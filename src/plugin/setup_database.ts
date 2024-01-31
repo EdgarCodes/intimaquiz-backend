@@ -7,7 +7,6 @@ import { Question } from "../models/question";
 
 interface DatabasePluginOptions {
     host: string;
-    port: number;
     database: string;
     user: string;
 }
@@ -16,6 +15,7 @@ const setup_database: FastifyPluginAsync<DatabasePluginOptions> = async(fastify:
     let database:Sequelize;
 
     if(process.env.ENV === "production") {
+        console.log("GOT HERE")
         database = new Sequelize({
             database: opts.database,
             username: opts.user,

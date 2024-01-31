@@ -7,7 +7,6 @@ const server = fastify();
 server.register(test_routes);
 server.register(setup_database, {
     host: "35.202.192.158",
-    port: 5432,
     database: "intimadb",
     user: "intima"
 })
