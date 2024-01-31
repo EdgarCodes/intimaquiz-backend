@@ -15,13 +15,12 @@ const setup_database: FastifyPluginAsync<DatabasePluginOptions> = async(fastify:
     let database:Sequelize;
 
     if(process.env.ENV === "production") {
-        console.log("GOT HERE")
         database = new Sequelize({
+            host: "/cloudsql/intimaquiz:us-central1:intimaquiz-db",
             database: opts.database,
             username: opts.user,
             password: process.env.POSTGRESPASS,
             dialect: "postgres",
-            dialectOptions: { socketPath: "/cloudsql/intimaquiz:us-central1:intimaquiz-db" },
             models: [Question]
         });
 
