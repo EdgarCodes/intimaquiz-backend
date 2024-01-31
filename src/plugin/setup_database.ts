@@ -4,6 +4,9 @@ import { Sequelize } from "sequelize-typescript";
 
 //Models 
 import { Question } from "../models/question";
+import { Session } from "../models/session";
+import { SessionGroup } from "../models/session_group";
+import { Response } from "../models/response";
 
 interface DatabasePluginOptions {
     host: string;
@@ -21,7 +24,7 @@ const setup_database: FastifyPluginAsync<DatabasePluginOptions> = async(fastify:
             username: opts.user,
             password: process.env.POSTGRESPASS,
             dialect: "postgres",
-            models: [Question]
+            models: [Question, Session, SessionGroup, Response]
         });
 
     }
@@ -33,7 +36,7 @@ const setup_database: FastifyPluginAsync<DatabasePluginOptions> = async(fastify:
             dialect: "postgres",
             username: opts.user,
             password: process.env.POSTGRESPASS,
-            models: [Question]
+            models: [Question, Session, SessionGroup, Response]
         });
     }
 

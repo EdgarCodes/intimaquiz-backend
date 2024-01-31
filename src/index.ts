@@ -1,10 +1,17 @@
 import fastify from 'fastify';
-import test_routes from "./routes/test_routes";
 import setup_database from './plugin/setup_database';
+import questionRoutes from './routes/question_routes';
+import fastifyCors from '@fastify/cors';
 
 const server = fastify();
 
-server.register(test_routes);
+
+// Register fastify-cors
+server.register(fastifyCors, { 
+    origin: '*' // Allows all origins (TODO allow only from website url and cloud url)
+});
+
+server.register(questionRoutes);
 server.register(setup_database, {
     host: "35.202.192.158",
     database: "intimadb",
