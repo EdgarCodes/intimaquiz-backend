@@ -13,23 +13,20 @@ export class Question extends Model {
     @Column({ type: DataType.STRING,  allowNull: false})
     category: string
 
+    @Column({ type: DataType.STRING, allowNull: false})
+    quiz: string 
+
     @Column({ type: DataType.TEXT, allowNull: false})
     question: string
 
+    @Column({ type: DataType.STRING,  allowNull: false}) // Options: any, male, female
+    gender: string
+
+    @Column({ type: DataType.STRING,  allowNull: false}) // Options: S, G, L
+    pairing: string
+
     @Column({ type: DataType.TEXT, allowNull: true})
     optional_information: string 
-
-    @ForeignKey(() => Question)
-    @Column({ type: DataType.INTEGER, allowNull: true})
-    parent_id: number
-
-    // A question belongs to its parent (if it has one)
-    @BelongsTo(() => Question, 'parent_id')
-    parentQuestion: Question;
-
-    // A question has many child questions
-    @HasMany(() => Question, 'parent_id')
-    childQuestions: Question[];
 
     @HasMany(() => Response)
     reponses: Response[]

@@ -5,11 +5,17 @@ import { Response } from "./response";
 
 @Table({
     timestamps: false,
-    tableName: "session"
+    tableName: "sessions"
 })
 export class Session extends Model {
-    @Column({primaryKey: true, type: DataType.UUID,  allowNull: false})
+    @Column({primaryKey: true, type: DataType.UUID,  allowNull: false, defaultValue: DataType.UUIDV4})
     session_id: string
+
+    @Column({type: DataType.STRING,  allowNull: false})
+    name: string
+
+    @Column({type: DataType.STRING,  allowNull: false})
+    gender: string
 
     @Default(false)
     @Column({type: DataType.BOOLEAN,  allowNull: false})
